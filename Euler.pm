@@ -19,7 +19,18 @@ sub BUILD {
 sub run {
         my ($self) = @_;
 
+        $self->_get_problem if $self->verbose;
+
         $self->_solve;
+}
+
+sub _get_problem {
+        my ($self) = @_;
+
+        my $problem_num = $self->test;
+        my $problem_text = '';
+
+        say sprintf("Problem %d\n%s",$problem_num,$problem_text);
 }
 
 sub _load_role {

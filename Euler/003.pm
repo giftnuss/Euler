@@ -8,8 +8,6 @@ requires 'run';
 sub _solve {
         my ($self) = @_;
 
-        say 'Problem 003';
-
         my $target = 600851475143;
 
         my $max_prime = sprintf "%d", sqrt $target;
@@ -28,7 +26,7 @@ sub _solve {
                 }
         }
 
-        say join ", ", @pf;
+        say pop @pf;
 }
 
 1;
