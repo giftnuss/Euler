@@ -1,4 +1,4 @@
-package Euler::001;
+package Euler::Problems::001;
 
 use Modern::Perl;
 use Moose::Role;

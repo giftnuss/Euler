@@ -5,11 +5,6 @@ use Moose::Util;
 use Math::Big;
 use Modern::Perl;
 
-with 'MooseX::Getopt';
-
-has 'test' => ( is => 'rw', isa => 'Str', default => sub { '001' } );
-has 'verbose' => ( is => 'rw', isa => 'Bool', default => sub { 1 } );
-
 has 'result' => ( is => 'rw', isa => 'Any' );
 
 sub BUILD {
@@ -48,7 +43,7 @@ sub _say_solution {
 sub _load_role {
         my ($self) = @_;
 
-        my $role = 'Euler::' . $self->test;
+        my $role = join '::', ('Euler', 'Problems', $self->test);
 
         Moose::Util::apply_all_roles($self, ($role));
 

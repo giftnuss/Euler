@@ -2,8 +2,8 @@
 
 use Modern::Perl;
 
-use Euler;
+use Euler::App;
 
-my $app = Euler->new_with_options();
+my $app = Euler::App->new_with_options();
 
 $app->run;
