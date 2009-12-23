@@ -26,7 +26,7 @@ sub _solve {
                 }
         }
 
-        say pop @pf;
+        return pop @pf;
 }
 
 1;

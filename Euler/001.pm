@@ -13,7 +13,7 @@ sub _solve {
 
         my @digits = map { $sum += $_; $_} grep { ($_ % 3 == 0) or ( $_ % 5 == 0) } 1..$final_num;
 
-        say $sum;
+        return $sum;
 }
 
 1;

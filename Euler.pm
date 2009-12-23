@@ -10,6 +10,8 @@ with 'MooseX::Getopt';
 has 'test' => ( is => 'rw', isa => 'Str', default => sub { '001' } );
 has 'verbose' => ( is => 'rw', isa => 'Bool', default => sub { 1 } );
 
+has 'result' => ( is => 'rw', isa => 'Any' );
+
 sub BUILD {
         my ($self, $params) = @_;
 
@@ -21,7 +23,11 @@ sub run {
 
         $self->_get_problem if $self->verbose;
 
-        $self->_solve;
+        $self->result($self->_solve);
+
+        $self->_say_solution if $self->verbose;
+
+        return $self->result;
 }
 
 sub _get_problem {
@@ -31,6 +37,12 @@ sub _get_problem {
         my $problem_text = '';
 
         say sprintf("Problem %d\n%s",$problem_num,$problem_text);
+}
+
+sub _say_solution {
+        my ($self, $result) = @_;
+
+        say sprintf("Solution: %s",$self->result);
 }
 
 sub _load_role {
