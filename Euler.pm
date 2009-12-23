@@ -2,8 +2,9 @@ package Euler;
 
 use Moose;
 use Moose::Util;
-use Math::Big;
 use Modern::Perl;
+
+with 'Euler::MathUtils';
 
 has 'result' => ( is => 'rw', isa => 'Any' );
 
@@ -47,14 +48,6 @@ sub _load_role {
 
         Moose::Util::apply_all_roles($self, ($role));
 
-}
-
-sub get_primes {
-        my ($self, $max) = @_;
-
-        my @primes = Math::Big::primes($max);
-
-        return @primes;
 }
 
 1;
