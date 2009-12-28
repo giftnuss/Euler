@@ -4,8 +4,11 @@ use Moose;
 use Moose::Util;
 use Modern::Perl;
 
-with 'Euler::MathUtils';
+with qw/
+        Euler::MathUtils
+        /;
 
+has 'problem' => ( is => 'rw', isa => 'Str', default => sub { '001' } );
 has 'result' => ( is => 'rw', isa => 'Any' );
 
 sub BUILD {
@@ -17,28 +20,7 @@ sub BUILD {
 sub run {
         my ($self) = @_;
 
-        $self->_get_problem if $self->verbose;
-
-        $self->result($self->_solve);
-
-        $self->_say_solution if $self->verbose;
-
-        return $self->result;
-}
-
-sub _get_problem {
-        my ($self) = @_;
-
-        my $problem_num = $self->test;
-        my $problem_text = '';
-
-        say sprintf("Problem %d\n%s",$problem_num,$problem_text);
-}
-
-sub _say_solution {
-        my ($self, $result) = @_;
-
-        say sprintf("Solution: %s",$self->result);
+        return $self->result($self->_solve);
 }
 
 =head2
@@ -52,7 +34,7 @@ TODO: Handle multiple tests
 sub _load_problem {
         my ($self) = @_;
 
-        my $role = join '::', ('Euler', 'Problems', $self->test);
+        my $role = join '::', ('Euler', 'Problems', $self->problem);
 
         Moose::Util::apply_all_roles($self, ($role));
 
